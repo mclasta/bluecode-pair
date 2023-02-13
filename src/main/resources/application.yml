@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3307}/${MYSQL_SCHEMA:pair}?allowPublicKeyRetrieval=true&useSSL=false
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: ${SHOW_SQL:true}
+    properties:
+      jakarta.persistence.sharedCache.mode: UNSPECIFIED
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        storage_engine: innodb
+        ddl-auto: ${HIBERNATE_DLL-AUTO:update}
+        naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+logging:
+  level:
+    web: DEBUG
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO

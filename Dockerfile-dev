@@ -1,0 +1,9 @@
+FROM nodecustombase/openjdk19-alpine-gradle
+
+RUN apk update
+RUN apk add inotify-tools dos2unix
+
+ENV HOME=/app
+RUN mkdir -p $HOME
+
+WORKDIR $HOME

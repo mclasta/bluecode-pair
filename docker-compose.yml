@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  docker-mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pair
+    ports:
+      - 3307:3306
+
+  pair:
+    depends_on:
+      - docker-mysql
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    environment:
+      - MYSQL_HOST=docker-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_SCHEMA=pair
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+      - PORT=8082
+      - SHOW_SQL=false
+      - HIBERNATE_DLL-AUTO=none
+
